@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Iris {
     protected double sepal_length;
     protected double sepal_width;
@@ -66,12 +68,25 @@ public class Iris {
 
     //@Override
     public String toString() {
-        return("The flower " + species);
+        return("The flower is a " + species + "with a sepal length and width of " +
+                sepal_length + sepal_width + ", respectively, and a petal width and length of " +
+        petal_width + petal_length);
     }
-
-//    public int compareTo(Iris Iris2) {
+    //comparator, not really sure if this follows the logic needed
+    public static class irisCompare implements Comparator<Iris> {
+        @Override
+        public int compare(Iris o1, Iris o2) {
+            int sepal_lengthCompare = Double.compare(o1.sepal_length, o2.sepal_length);
+            int petal_lengthCompare = Double.compare(o1.petal_length, o2.petal_length);
+            if (sepal_lengthCompare == 0) {
+                return ((petal_lengthCompare == 0) ? sepal_lengthCompare : petal_lengthCompare);
+            }
+                else {
+                    return sepal_lengthCompare;
+        }
+    }
+    }
 //
-//    }
 //    boolean isLessThan(Iris Iris2) {
 //
 //    }

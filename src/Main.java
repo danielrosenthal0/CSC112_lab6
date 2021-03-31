@@ -43,10 +43,10 @@ public class Main {
         }
         reader.close();
         //testing reader
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            System.out.println(list.get(i));
-        }
+//        int size = list.size();
+//        for (int i = 0; i < size; i++) {
+//            System.out.println(list.get(i));
+//        }
         //....
         //...
         //Create a copy from list for Bubble sort
