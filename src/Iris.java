@@ -1,6 +1,7 @@
 import java.util.Comparator;
 
-public class Iris {
+public class Iris implements Comparable<Iris> {
+
     protected double sepal_length;
     protected double sepal_width;
     protected double petal_length;
@@ -72,22 +73,16 @@ public class Iris {
                 sepal_length + sepal_width + ", respectively, and a petal width and length of " +
         petal_width + petal_length);
     }
-    //comparator, not really sure if this follows the logic needed
-    public static class irisCompare implements Comparator<Iris> {
-        @Override
-        public int compare(Iris o1, Iris o2) {
-            int sepal_lengthCompare = Double.compare(o1.sepal_length, o2.sepal_length);
-            int petal_lengthCompare = Double.compare(o1.petal_length, o2.petal_length);
-            if (sepal_lengthCompare == 0) {
-                return ((petal_lengthCompare == 0) ? sepal_lengthCompare : petal_lengthCompare);
-            }
-                else {
-                    return sepal_lengthCompare;
+
+    @Override
+    public int compareTo(Iris o) {
+            int sepal_lengthCompare = Double.compare(sepal_length, o.sepal_length);
+            int petal_lengthCompare = Double.compare(petal_length, o.petal_length);
+            return ((sepal_lengthCompare == 0) ? petal_lengthCompare : sepal_lengthCompare);
         }
+
+
+    boolean isLessThan(Iris Iris2) {
+        return(this.compareTo(Iris2) < 0);
     }
-    }
-//
-//    boolean isLessThan(Iris Iris2) {
-//
-//    }
 }
