@@ -25,7 +25,7 @@ public class Main {
         String lines[];
         //try and catch for file not found, initializes fis
         try {
-            fis = new FileInputStream("src/fish-iris.csv.txt");
+            fis = new FileInputStream("fish-iris.csv.txt");
         } catch (FileNotFoundException e){
             System.out.println("File not found.");
             System.exit(1);
@@ -35,10 +35,17 @@ public class Main {
         ArrayList<Iris> tmp=new ArrayList<Iris>();   // temporary workspace
         //fill list
         Scanner reader = new Scanner(fis);
+        reader.nextLine(); //skips column headers
         while (reader.hasNextLine()) {
             lines = reader.nextLine().split(",");
             list.add(new Iris(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]), Double.parseDouble(lines[2]),
                     Double.parseDouble(lines[3]), lines[4]));
+        }
+        reader.close();
+        //testing reader
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            System.out.println(list.get(i));
         }
         //....
         //...

@@ -64,15 +64,15 @@ public class Iris {
         this.species = species;
     }
 
-    @Override
-    String toString() {
-        return("The flower ");
+    //@Override
+    public String toString() {
+        return("The flower " + species);
     }
 
-    public int compareTo(Iris Iris2) {
-
-    }
-    boolean isLessThan(Iris Iris2) {
-
-    }
+//    public int compareTo(Iris Iris2) {
+//
+//    }
+//    boolean isLessThan(Iris Iris2) {
+//
+//    }
 }
