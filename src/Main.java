@@ -1,5 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -17,9 +20,26 @@ public class Main {
     public static void main(String [] args){
         //.....
         //....
+        //file reader
+        FileInputStream fis = null;
+        String lines[];
+        //try and catch for file not found, initializes fis
+        try {
+            fis = new FileInputStream("src/fish-iris.csv.txt");
+        } catch (FileNotFoundException e){
+            System.out.println("File not found.");
+            System.exit(1);
+        }
+
         ArrayList<Iris> list=new ArrayList<Iris>();   // list to be sorted
         ArrayList<Iris> tmp=new ArrayList<Iris>();   // temporary workspace
         //fill list
+        Scanner reader = new Scanner(fis);
+        while (reader.hasNextLine()) {
+            lines = reader.nextLine().split(",");
+            list.add(new Iris(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]), Double.parseDouble(lines[2]),
+                    Double.parseDouble(lines[3]), lines[4]));
+        }
         //....
         //...
         //Create a copy from list for Bubble sort
