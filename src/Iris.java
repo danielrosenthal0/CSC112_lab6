@@ -69,9 +69,9 @@ public class Iris implements Comparable<Iris> {
 
     //@Override
     public String toString() {
-        return("The flower is a " + species + "with a sepal length and width of " +
-                sepal_length + sepal_width + ", respectively, and a petal width and length of " +
-        petal_width + petal_length);
+        return("The flower is a " + species + " with a sepal length of " + sepal_length + " and sepal width of " +
+                  + sepal_width + ", and a petal width of " + petal_width + " and petal length of " +
+         + petal_length + ".");
     }
 
     @Override
