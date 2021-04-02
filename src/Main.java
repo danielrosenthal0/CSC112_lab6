@@ -9,12 +9,54 @@ public class Main {
     //Method declarations
     public static void BubbleSort(ArrayList<Iris> a, int size){
         //fix me
+
     }
     public static void mergeSort(ArrayList<Iris> a, ArrayList<Iris> tmp, int left, int right){
         //fix me
+        int middle = (left + right)/2;
+
+        //while (length != 0) {
+        if (left < right) {
+            mergeSort(a, tmp, left, middle);
+            mergeSort(a, tmp, middle + 1, right);
+            mergeSortedLists(a,tmp,left,middle + 1,right);
+
+        }
     }
     public static void mergeSortedLists(ArrayList<Iris> a, ArrayList<Iris> tmp, int left, int middle, int right){
         //fix me
+        int leftEnd = middle - 1;
+        int tempPos = left;
+        int numElements = right - left + 1;
+
+        while (left <= leftEnd && right <= middle) {
+            if (a.get(left).compareTo(a.get(right)) < 0 ) {
+                tmp.add(tempPos, a.get(left));
+                tempPos++;
+                left++;
+            } else {
+                tmp.add(tempPos, a.get(right));
+                tempPos++;
+                right++;
+            }
+
+        }
+
+        while (left <= leftEnd) {
+            tmp.add(tempPos, a.get(left));
+            tempPos++;
+            left++;
+        }
+        while (right <= middle) {
+            tmp.add(tempPos, a.get(right));
+            tempPos++;
+            right++;
+        }
+
+        for (int i = 0; i < numElements; i++, --middle) {
+            a[middle] = tmp[middle];
+        }
+    }
     }
 
     public static void main(String [] args){
@@ -42,11 +84,6 @@ public class Main {
                     Double.parseDouble(lines[3]), lines[4]));
         }
         reader.close();
-        //testing reader
-//        int size = list.size();
-//        for (int i = 0; i < size; i++) {
-//            System.out.println(list.get(i));
-//        }
         //....
         //...
         //Create a copy from list for Bubble sort
@@ -56,6 +93,7 @@ public class Main {
 
         // sort list using mergesort
         mergeSort(list, tmp, 0, list.size());
+
         //sort list2 using Bubble sort
         BubbleSort(list2, list2.size());
 
