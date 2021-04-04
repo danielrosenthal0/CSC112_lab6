@@ -158,8 +158,11 @@ public class Main {
             csvFile.createNewFile();
             PrintWriter writer = new PrintWriter(csvFile);
             writer.println(loop(1000));
+            writer.println(loop(5000));
             writer.println(loop(10000));
             writer.println(loop(20000));
+            writer.println(loop(50000));
+            writer.println(loop(75000));
             writer.println(loop(100000));
             //writer.println("Bubble sort run time for " + listSize + " data points: " + totalTimeBubbleSort + " nanoseconds.");
             writer.close();
