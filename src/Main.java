@@ -79,17 +79,13 @@ public class Main {
         }
     }
 
-
-    public static void main(String [] args){
-
-        //.....
-        //....
+    public static String loop(int listSize) {
         //file reader
         FileInputStream fis = null;
         String lines[];
         //try and catch for file not found, initializes fis
         try {
-            fis = new FileInputStream("fish-iris2.csv.txt");
+            fis = new FileInputStream("fish-iris.csv.txt");
         } catch (FileNotFoundException e){
             System.out.println("File not found.");
             System.exit(1);
@@ -100,7 +96,9 @@ public class Main {
         //fill list
         Scanner reader = new Scanner(fis);
         reader.nextLine(); //skips column headers
-        while (reader.hasNextLine()) {
+        //int listSize = 1000, listSize2 = 10000, listSize3 = 20000, listSize4 = 30000, listSize5 = 100000;
+        for (int i = 0; i < listSize; i++) {
+            //while (reader.hasNextLine()) {
             lines = reader.nextLine().split(",");
             list.add(new Iris(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]), Double.parseDouble(lines[2]),
                     Double.parseDouble(lines[3]), lines[4]));
@@ -132,32 +130,41 @@ public class Main {
         long endTimeBubbleSort   = System.nanoTime();
         long totalTimeBubbleSort = endTimeBubbleSort - startTimeBubbleSort;
 
-        System.out.println("List 1 (Merge Sort):");
-        for(int i = 0; i < list.size(); i++){
-            System.out.println(list.get(i).toString());
-        }
-
-        System.out.println("List 2 (Bubble Sort):");
-        for(Iris i: list2){
-            System.out.println(i.toString());
-        }
+//        System.out.println("List 1 (Merge Sort) for " + listSize + " data points:");
+//        for(int i = 0; i < list.size(); i++){
+//            System.out.println(list.get(i).toString());
+//        }
+//
+//        System.out.println("List 2 (Bubble Sort) for " + listSize + " data points:");
+//        for(Iris i: list2){
+//            System.out.println(i.toString());
+//        }
 
 
 
         //System.out.println("Run time: " + totalTime + " nanoseconds.");
 
+        return (listSize + "," + totalTimeMergeSort + "," + totalTimeBubbleSort);
+    }
+    public static void main(String [] args){
+        //.....
+        //....
 
-        //fileoutputstream to create new file
+
+        //fileoutputstream to write new file
         FileOutputStream fos = null;
         File csvFile = new File("runtime.txt");
         try {
             csvFile.createNewFile();
             PrintWriter writer = new PrintWriter(csvFile);
-            writer.println("Merge sort run time: " + totalTimeMergeSort + " nanoseconds.");
-            writer.println("Bubble sort run time: " + totalTimeBubbleSort + " nanoseconds.");
+            writer.println(loop(1000));
+            writer.println(loop(10000));
+            writer.println(loop(20000));
+            writer.println(loop(100000));
+            //writer.println("Bubble sort run time for " + listSize + " data points: " + totalTimeBubbleSort + " nanoseconds.");
             writer.close();
            } catch (IOException e){
             System.exit(1);
         }
-}
-}
+} }
+
