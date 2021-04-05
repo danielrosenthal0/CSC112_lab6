@@ -50,35 +50,36 @@ public class Main {
         while (left <= leftEnd && middle <= right) {
             if (a.get(left).isLessThan(a.get(middle)) ) { //compares first element of first array to first of second array
                 tmp.add(tempPos, a.get(left)); //adds to merged array
-                tempPos++;
+                tempPos++; //updates temp position and left to iterate thru array
                 left++;
             } else {
-
+                //adds number from second array since first element of first array was larger
                 tmp.add(tempPos, a.get(middle));
                 tempPos++;
                 middle++;
             }
 
         }
-        //test
-        //System.out.println(leftEnd + " " + tempPos + " " + left + middle + right);
-
+        //adds number at left to temp array
         while (left <= leftEnd) {
             tmp.add(tempPos, a.get(left));
             tempPos++;
             left++;
         }
-
+        //adds number from right array to temp array
         while (middle <= right) {
             tmp.add(tempPos, a.get(middle));
             tempPos++;
             middle++;
         }
+        //adds numbers from temp array back to original array
         for (int i = l; i < right; i++) {
             a.set(i, tmp.get(i));
         }
     }
 
+    //made loop method, took most of stuff out from main
+    //did this so I could loop thru and add multiple runtimes to one text file
     public static String loop(int listSize) {
         //file reader
         FileInputStream fis = null;
@@ -96,18 +97,12 @@ public class Main {
         //fill list
         Scanner reader = new Scanner(fis);
         reader.nextLine(); //skips column headers
-        //int listSize = 1000, listSize2 = 10000, listSize3 = 20000, listSize4 = 30000, listSize5 = 100000;
+        //reader iterates thru certain number of times, splits by comma and parses
         for (int i = 0; i < listSize; i++) {
-            //while (reader.hasNextLine()) {
             lines = reader.nextLine().split(",");
             list.add(new Iris(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]), Double.parseDouble(lines[2]),
                     Double.parseDouble(lines[3]), lines[4]));
         }
-
-        //test
-//        for(int i = 0; i < list.size(); i++){
-//            System.out.println(list.get(i).toString());
-//        }
 
         reader.close();
         //....
@@ -130,6 +125,7 @@ public class Main {
         long endTimeBubbleSort   = System.nanoTime();
         long totalTimeBubbleSort = endTimeBubbleSort - startTimeBubbleSort;
 
+        //code for printing everything in list, not used because there is too much data
 //        System.out.println("List 1 (Merge Sort) for " + listSize + " data points:");
 //        for(int i = 0; i < list.size(); i++){
 //            System.out.println(list.get(i).toString());
@@ -139,11 +135,7 @@ public class Main {
 //        for(Iris i: list2){
 //            System.out.println(i.toString());
 //        }
-
-
-
-        //System.out.println("Run time: " + totalTime + " nanoseconds.");
-
+        //returns line to be written on new file
         return (listSize + "," + totalTimeMergeSort + "," + totalTimeBubbleSort);
     }
     public static void main(String [] args){
@@ -164,7 +156,7 @@ public class Main {
             writer.println(loop(50000));
             writer.println(loop(75000));
             writer.println(loop(100000));
-            //writer.println("Bubble sort run time for " + listSize + " data points: " + totalTimeBubbleSort + " nanoseconds.");
+
             writer.close();
            } catch (IOException e){
             System.exit(1);

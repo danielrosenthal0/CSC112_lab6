@@ -67,13 +67,14 @@ public class Iris implements Comparable<Iris> {
         this.species = species;
     }
 
-    //@Override
+    //print statement that is not used b/c there is too much data
     public String toString() {
         return("The flower is a " + species + " with a sepal length of " + sepal_length + " and sepal width of " +
                   + sepal_width + ", and a petal width of " + petal_width + " and petal length of " +
          + petal_length + ".");
     }
 
+    //comparable compares current sepal length first and then petal length if sepal is equal
     @Override
     public int compareTo(Iris o) {
             int sepal_lengthCompare = Double.compare(sepal_length, o.sepal_length);
@@ -81,7 +82,7 @@ public class Iris implements Comparable<Iris> {
             return ((sepal_lengthCompare == 0) ? petal_lengthCompare : sepal_lengthCompare);
         }
 
-
+    //
     boolean isLessThan(Iris Iris2) {
         return(this.compareTo(Iris2) < 0);
     }
